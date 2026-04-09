@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621570f2c4e44e54a22a3e5d96686b2b, type: 3}
+  m_Name: Grenade SO M67
+  m_EditorClassIdentifier: 
+  <ItemID>k__BackingField: d6439543-9d3c-43b0-b1e6-15b90c04de82
+  <ItemName>k__BackingField: M67
+  <Icon>k__BackingField: {fileID: 21300000, guid: 41b567bd403849c47af6d8dd0a219099,
+    type: 3}
+  <Rarity>k__BackingField: 2
+  <Category>k__BackingField: 7
+  <GearSlotType>k__BackingField: 9

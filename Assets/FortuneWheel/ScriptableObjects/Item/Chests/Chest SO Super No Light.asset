@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51bf5e577bf34bf1b4027279ae34b58c, type: 3}
+  m_Name: Chest SO Super No Light
+  m_EditorClassIdentifier: 
+  <ItemID>k__BackingField: ede19387-f38d-4a58-8e27-06075182e32f
+  <ItemName>k__BackingField: Super No Light
+  <Icon>k__BackingField: {fileID: 21300000, guid: 38cfc42847f3d0145b9e70c43c92f8a9,
+    type: 3}
+  <Rarity>k__BackingField: 0

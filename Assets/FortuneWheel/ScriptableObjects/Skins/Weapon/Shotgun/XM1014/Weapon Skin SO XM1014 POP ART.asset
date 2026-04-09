@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9056205605c7427f83d5fc7255fd0c0c, type: 3}
+  m_Name: Weapon Skin SO XM1014 POP ART
+  m_EditorClassIdentifier: 
+  <ItemID>k__BackingField: 4be2a1f0-4bac-45c7-a58a-18b1bdd72a61
+  <ItemName>k__BackingField: POP ART
+  <Icon>k__BackingField: {fileID: 21300000, guid: 52c69b5617163744db2c8841079ab4b1,
+    type: 3}
+  <Rarity>k__BackingField: 4
+  targetItem: {fileID: 11400000, guid: 9131a31f18ce8c54dbad98b41ee6a6d6, type: 2}
