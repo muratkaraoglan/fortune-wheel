@@ -2,13 +2,12 @@ using UnityEngine;
 
 namespace FortuneWheel.Scripts.Stat
 {
-    public class HealEffect : StatEffect
+    public class SpeedEffect : StatEffect
     {
-        public HealEffect()
+        public SpeedEffect()
         {
-            EffectType = "Heal";
+            EffectType = "Speed";
         }
-
         public override void Apply(GameObject target)
         {
             

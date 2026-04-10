@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using FortuneWheel.Scripts.Item.Enums;
 using FortuneWheel.Scripts.Stat;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FortuneWheel.Scripts.Item
 {
@@ -13,8 +12,11 @@ namespace FortuneWheel.Scripts.Item
         
         [field: SerializeField] public CategoryType Category { get; private set; }
         [field: SerializeField] public GearSlotType GearSlotType { get; private set; }
+        [field:Header("")]
         [field: SerializeField] public float Duration { get; private set; }
+        [field: SerializeField] public float Cooldown { get; private set; }
 
+    
         [SerializeReference] public List<StatEffect> effects;
         
         public void Use(GameObject user)
