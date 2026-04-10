@@ -1,7 +1,4 @@
-using FortuneWheel.Scripts.Item;
-using UnityEngine;
-
-namespace FortuneWheel.Scripts
+namespace FortuneWheel.Scripts.Item
 {
     public abstract class SkinBaseSO : ItemBaseSO
     {

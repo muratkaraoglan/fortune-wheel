@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.Linq;
-using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.Stat;
 
 namespace FortuneWheel.Scripts.Utils

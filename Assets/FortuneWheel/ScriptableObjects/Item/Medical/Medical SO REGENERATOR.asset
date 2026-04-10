@@ -22,24 +22,25 @@ MonoBehaviour:
   <Duration>k__BackingField: 0
   <Cooldown>k__BackingField: 0
   effects:
-  - rid: 8905352827307556872
+  - rid: 8905352830734041088
   - rid: 8905352827307556874
   references:
     version: 2
     RefIds:
-    - rid: 8905352827307556872
-      type: {class: HealEffect, ns: FortuneWheel.Scripts.Stat, asm: Assembly-CSharp}
-      data:
-        <EffectType>k__BackingField: Heal
-        amount: 0
-        applicationType: 0
-        valueType: 0
-        stackingLogic: 1
     - rid: 8905352827307556874
       type: {class: SpeedEffect, ns: FortuneWheel.Scripts.Stat, asm: Assembly-CSharp}
       data:
         <EffectType>k__BackingField: Speed
-        amount: 0
-        applicationType: 0
-        valueType: 1
-        stackingLogic: 0
+        <Amount>k__BackingField: 0
+        <ApplicationType>k__BackingField: 0
+        <ValueType>k__BackingField: 0
+        <StackingLogic>k__BackingField: 0
+    - rid: 8905352830734041088
+      type: {class: AOEHealEffect, ns: FortuneWheel.Scripts.Stat, asm: Assembly-CSharp}
+      data:
+        <EffectType>k__BackingField: AOE Heal
+        <Amount>k__BackingField: 0
+        <ApplicationType>k__BackingField: 0
+        <ValueType>k__BackingField: 0
+        <StackingLogic>k__BackingField: 0
+        radius: 0
