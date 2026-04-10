@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9340f80bc61a42cab610e6f5a3b2e932, type: 3}
+  m_Name: Wheel Zone Config Gold
+  m_EditorClassIdentifier: 
+  <IsSafeZone>k__BackingField: 1
+  <WheelSprite>k__BackingField: {fileID: 21300000, guid: 62e4d7cc9bab21841a890dd50e9f66b3,
+    type: 3}
+  <WheelPointerSprite>k__BackingField: {fileID: 21300000, guid: 8cc32827ed88bba4883baf8e8ab61456,
+    type: 3}
+  guaranteedItems: []
+  randomItemPool:
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 1af022d5be1c8994db431075840a90d9,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 10
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: a2162f72768dc7740bd69494e5239165,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 5
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 00c4c1303098e094cabcfd2e639d0d03,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 7
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 99fb921da51d91144bb27e4fc0250511,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 5
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: bc34b0495b3d7dd45af0b032682c97b4,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 8
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 1562818534c71e44b868107c91ec53d3,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 1
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: d5df16c0701ae0147af48c0547b6163a,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 1
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: d58345983b89bbf4ca7311b9891bf2e1,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 1
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 8e00bf7db1e3b2f42a66f15b19648719,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 55
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 9547312df9f4ded46a11e70ad694ef00,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 3500
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 9547312df9f4ded46a11e70ad694ef00,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 5000
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: b4731e984bbfa734ea6e42cd307fd12d,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    <DropCount>k__BackingField: 1

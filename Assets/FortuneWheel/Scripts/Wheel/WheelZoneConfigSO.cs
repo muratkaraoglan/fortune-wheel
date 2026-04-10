@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace FortuneWheel.Scripts.Wheel
 {
-    [CreateAssetMenu(menuName = "Fortune Wheel/Wheel/Wheel Item Config")]
-    public class WheelItemConfigSO : ScriptableObject
+    [CreateAssetMenu(menuName = "Fortune Wheel/Wheel/Wheel Zone Config")]
+    public class WheelZoneConfigSO : ScriptableObject
     {
         [field: SerializeField] public bool IsSafeZone { get; private set; }
         [field: SerializeField] public Sprite WheelSprite { get; private set; }

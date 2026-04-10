@@ -28,19 +28,19 @@ namespace FortuneWheel.Scripts.Utils
                 case < 1_000_000:
                 {
                     float value = n / 1000f;
-                    text.SetText("x{0:0.#}k", value);
+                    text.SetText("x{0:0}k", value);
                     return;
                 }
                 case < 1_000_000_000:
                 {
                     float value = n / 1_000_000f;
-                    text.SetText("x{0:0.#}m", value);
+                    text.SetText("x{0:0}m", value);
                     return;
                 }
                 default:
                 {
                     var v = n / 1_000_000_000f;
-                    text.SetText("x{0:0.#}b", v);
+                    text.SetText("x{0:0}b", v);
                     break;
                 }
             }
