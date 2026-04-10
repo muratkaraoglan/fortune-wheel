@@ -10,6 +10,7 @@ namespace FortuneWheel.Scripts.Item.Enums
         Chest,
         WeaponPoint,
         Consumable,
-        Skin
+        Skin,
+        Mısc
     }
 }

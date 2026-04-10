@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 
 namespace FortuneWheel.Scripts.Utils
@@ -44,5 +45,23 @@ namespace FortuneWheel.Scripts.Utils
                 }
             }
         }
+        
+        /// <summary>
+        /// Shuffle the list based on Fisher-Yates algorithm
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            System.Random rnd = new System.Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rnd.Next(n + 1);
+                (list[k], list[n]) = (list[n], list[k]);
+            }
+        }
+
     }
 }

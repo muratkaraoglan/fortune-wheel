@@ -6,14 +6,14 @@ using FortuneWheel.Scripts.Utils;
 
 namespace FortuneWheel.Scripts.Wheel
 {
-    public class WheelSliceVisualController : BaseVisualController<WheelItemData>
+    public class WheelSliceVisualController : BaseVisualController<WheelSliceItemData>
     {
         [SerializeField] private Image itemIcon;
         [SerializeField] private TextMeshProUGUI itemAmountText;
         
-        protected override void OnInitialize(WheelItemData data)
+        protected override void OnInitialize(WheelSliceItemData data)
         {
-            itemIcon.sprite = data.ItemSprite;
+            itemIcon.sprite = data.DropItem.Icon;
 
             if (data.DropCount > 0)
             {

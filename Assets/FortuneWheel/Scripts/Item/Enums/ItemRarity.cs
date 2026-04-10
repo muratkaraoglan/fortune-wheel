@@ -1,4 +1,4 @@
-namespace FortuneWheel.Scripts.Item
+namespace FortuneWheel.Scripts.Item.Enums
 {
     public enum ItemRarity
     {
