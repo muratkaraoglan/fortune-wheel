@@ -24,7 +24,7 @@ namespace FortuneWheel.Scripts.Wheel
         
         protected override void OnClear()
         {
-           itemIcon.sprite = null;
+           itemIcon.enabled = false;
            itemAmountText.SetText(string.Empty);
         }
     }

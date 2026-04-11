@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-
 namespace FortuneWheel.Scripts.Wheel
 {
     [CreateAssetMenu(menuName = "Fortune Wheel/Wheel/Wheel Settings Config")]

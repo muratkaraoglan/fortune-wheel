@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace FortuneWheel.Scripts.Item
 {
-   
-    public abstract class ItemBaseSO : ScriptableObject
+    public abstract class ItemBaseSO : ScriptableObject, IItem
     {
         [field: SerializeField, ReadOnly] public string ItemID { get; private set; }
         [field: SerializeField] public string ItemName { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public ItemRarity Rarity { get; private set; }
-        
+
         public abstract ItemType Type { get; }
 
         private void OnValidate()

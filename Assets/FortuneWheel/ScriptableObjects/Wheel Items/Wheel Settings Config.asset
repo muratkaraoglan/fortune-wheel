@@ -15,7 +15,7 @@ MonoBehaviour:
   <SpinDuration>k__BackingField: 3
   <MinRotation>k__BackingField: 5
   <MaxRotation>k__BackingField: 7
-  <ClockwiseRotation>k__BackingField: 1
+  <ClockwiseRotation>k__BackingField: 0
   <SpinCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:

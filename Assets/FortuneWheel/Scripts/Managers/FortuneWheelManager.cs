@@ -11,7 +11,9 @@ namespace FortuneWheel.Scripts.Managers
     {
         [SerializeField] private Transform wheelTransform;
         [SerializeField] private WheelSettingsConfigSO wheelSettingsConfig;
+        [SerializeField] private WheelRewardDispatcher rewardDispatcher;
         [SerializeField] private List<WheelSliceVisualController> sliceVisualControllers;
+
 
         [Header("Visual")] [SerializeField] private Image wheelImage;
         [SerializeField] private Image wheelPointerImage;
@@ -22,8 +24,9 @@ namespace FortuneWheel.Scripts.Managers
         private const int SliceItemCount = 8;
         private const float AnglePerSlice = 45;
         private const float FullRotationDegrees = 360f;
-        
+
         private int _currentSpinCount = 1;
+        private int selectedSliceIndex;
         public float targetRotation;
 
         private void Start()
@@ -37,21 +40,21 @@ namespace FortuneWheel.Scripts.Managers
         {
             _currentSpinCount++;
 
-            var selectedSliceIndex = SelectWinningSliceIndex();
-            
+            selectedSliceIndex = SelectWinningSliceIndex();
+
             print(_cachedSliceItems[selectedSliceIndex].DropItem.ItemName);
 
             var rotations = Random.Range(wheelSettingsConfig.MinRotation, wheelSettingsConfig.MaxRotation);
             targetRotation = selectedSliceIndex * AnglePerSlice;
-            
-            
+
+
             if (wheelSettingsConfig.ClockwiseRotation)
             {
-                targetRotation = -(FullRotationDegrees * rotations + (FullRotationDegrees - targetRotation) );
+                targetRotation = -(FullRotationDegrees * rotations + (FullRotationDegrees - targetRotation));
             }
             else
             {
-                targetRotation = FullRotationDegrees * rotations + targetRotation ;
+                targetRotation = FullRotationDegrees * rotations + targetRotation;
             }
 
             wheelTransform.DORotate(new Vector3(0, 0, targetRotation),
@@ -68,6 +71,7 @@ namespace FortuneWheel.Scripts.Managers
 
         private void SetWheelSlices()
         {
+            wheelTransform.localRotation = Quaternion.Euler(0, 0, 0);
             _currentZone = wheelSettingsConfig.GetCurrentZone(_currentSpinCount);
             wheelImage.sprite = _currentZone.WheelSprite;
             wheelPointerImage.sprite = _currentZone.WheelPointerSprite;
@@ -101,6 +105,9 @@ namespace FortuneWheel.Scripts.Managers
 
         private void OnSpinComplete()
         {
+            var selectedItem = _cachedSliceItems[selectedSliceIndex];
+            rewardDispatcher.Dispatch(selectedItem.DropItem, selectedItem.DropCount);
+            SetWheelSlices();
         }
     }
 }
