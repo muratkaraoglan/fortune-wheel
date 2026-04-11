@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using FortuneWheel.Scripts.UI.Visual;
 using FortuneWheel.Scripts.Wheel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,7 @@ namespace FortuneWheel.Scripts.Managers
 
         [Header("Visual")] [SerializeField] private Image wheelImage;
         [SerializeField] private Image wheelPointerImage;
+        [SerializeField] private TextScroller spinCountTextScroller;
 
         private Button _spinButton;
 
@@ -36,8 +37,6 @@ namespace FortuneWheel.Scripts.Managers
         private void Start()
         {
             ResetWheel();
-            SetWheelSlices();
-            SetSpinButtonState(true);
         }
 
         private void OnValidate()
@@ -95,6 +94,8 @@ namespace FortuneWheel.Scripts.Managers
         {
             _currentSpinCount = 1;
             wheelTransform.localRotation = Quaternion.Euler(0, 0, 0);
+            SetWheelSlices();
+            SetSpinButtonState(true);
         }
 
         private void SetWheelSlices()
@@ -110,6 +111,9 @@ namespace FortuneWheel.Scripts.Managers
             {
                 sliceVisualControllers[i].Initialize(_cachedSliceItems[i]);
             }
+
+            spinCountTextScroller.ScrollToValue(_currentSpinCount.ToString(),
+                _currentZone.IsSafeZone ? Color.green : Color.white);
         }
 
         private int SelectWinningSliceIndex()
