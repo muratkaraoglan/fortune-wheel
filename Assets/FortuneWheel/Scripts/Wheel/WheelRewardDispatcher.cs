@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.UI.Visual;
@@ -26,22 +27,18 @@ namespace FortuneWheel.Scripts.Wheel
             inventoryUI.Bind(inventory);
         }
 
-        public void Dispatch(ItemBaseSO item, int quantity)
+        public void Dispatch(ItemBaseSO item, int quantity,Action onDispatchComplete)
         {
             bool isNew = !inventory.Has(item.ItemID);
 
-            // Her iki durumda da önce inventory güncelle
             inventory.TryAdd(item, quantity);
 
-            // View'u al — yeni ise OnSlotCreated ile az önce doğdu
             WheelInventorySlotVisualController targetView = isNew
                 ? inventoryUI.GetLastView()
                 : inventoryUI.GetExistingViewForItem(item.ItemID);
 
             if (targetView == null) return;
-
-            // Yeni item: counter 0'dan başlar, flyingler asıl değere taşır
-            // Var olan item: counter mevcut değerdeydi, flyingler yeni değere taşır
+            
             var displayStart = isNew
                 ? 0
                 : inventory.GetQuantity(item.ItemID) - quantity;
@@ -50,20 +47,26 @@ namespace FortuneWheel.Scripts.Wheel
 
             inventoryUI.SuppressRefresh = true;
 
-            LaunchFlying(item, quantity, targetView, inventory.GetQuantity(item.ItemID));
+            StartCoroutine(DelayedLaunch(item, quantity, targetView, onDispatchComplete));
+            //LaunchFlying(item, quantity, targetView, onDispatchComplete);
         }
 
-        private void LaunchFlying(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView,
-            int finalQuantity)
+        IEnumerator DelayedLaunch(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView , Action onComplete)
         {
-            int effectiveCount = Mathf.Clamp(spawnCount, 1, quantity);
-            int perIcon = quantity / effectiveCount;
-            int remainder = quantity % effectiveCount;
-            int arrived = 0;
+            yield return null;
+            LaunchFlying(item, quantity, targetView, onComplete);
+        }
 
-            for (int i = 0; i < effectiveCount; i++)
+        private void LaunchFlying(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView , Action onComplete)
+        {
+            var effectiveCount = Mathf.Clamp(spawnCount, 1, quantity);
+            var perIcon = quantity / effectiveCount;
+            var remainder = quantity % effectiveCount;
+            var arrived = 0;
+
+            for (var i = 0; i < effectiveCount; i++)
             {
-                int capturedIndex = i;
+                var capturedIndex = i;
 
                 var flying = Instantiate(flyingItemPrefab, flyingItemContainer);
                 flying.Initialize(new FlyingItemVisualData
@@ -77,7 +80,7 @@ namespace FortuneWheel.Scripts.Wheel
                     {
                         arrived++;
 
-                        int bump = perIcon + (arrived == effectiveCount ? remainder : 0);
+                        var bump = perIcon + (arrived == effectiveCount ? remainder : 0);
                         //targetView.IconImageRect.DOPunchScale(Vector3.one * .7f, .1f, 5, 0.5f);
                         if (bump > 0)
                         {
@@ -86,7 +89,10 @@ namespace FortuneWheel.Scripts.Wheel
                         }
 
                         if (arrived == effectiveCount)
+                        {
                             inventoryUI.SuppressRefresh = false;
+                            onComplete?.Invoke();
+                        }
                     }
                 });
             }

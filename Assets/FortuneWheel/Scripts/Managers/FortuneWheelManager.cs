@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using FortuneWheel.Scripts.Wheel;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace FortuneWheel.Scripts.Managers
 {
@@ -14,9 +16,10 @@ namespace FortuneWheel.Scripts.Managers
         [SerializeField] private WheelRewardDispatcher rewardDispatcher;
         [SerializeField] private List<WheelSliceVisualController> sliceVisualControllers;
 
-
         [Header("Visual")] [SerializeField] private Image wheelImage;
         [SerializeField] private Image wheelPointerImage;
+
+        private Button _spinButton;
 
         private readonly List<WheelSliceItemData> _cachedSliceItems = new(8);
         private WheelZoneConfigSO _currentZone;
@@ -25,39 +28,64 @@ namespace FortuneWheel.Scripts.Managers
         private const float AnglePerSlice = 45;
         private const float FullRotationDegrees = 360f;
 
+        private float _targetRotation;
         private int _currentSpinCount = 1;
-        private int selectedSliceIndex;
-        public float targetRotation;
+        private int _selectedSliceIndex;
+        private bool _canSpin;
 
         private void Start()
         {
             ResetWheel();
             SetWheelSlices();
+            SetSpinButtonState(true);
         }
 
-        [ContextMenu("Spin")]
-        public void Spin()
+        private void OnValidate()
         {
+            var spinBtn = transform.Find("SpinButton").GetComponent<Button>();
+            if (spinBtn != null)
+            {
+                _spinButton = spinBtn;
+                _spinButton.onClick.AddListener(Spin);
+            }
+            else
+            {
+                Debug.LogError("Spin button not found");
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_spinButton != null)
+            {
+                _spinButton.onClick.RemoveListener(Spin);
+            }
+        }
+
+        private void Spin()
+        {
+            if (!_canSpin) return;
+            SetSpinButtonState(false);
             _currentSpinCount++;
 
-            selectedSliceIndex = SelectWinningSliceIndex();
+            _selectedSliceIndex = SelectWinningSliceIndex();
 
-            print(_cachedSliceItems[selectedSliceIndex].DropItem.ItemName);
+            print(_cachedSliceItems[_selectedSliceIndex].DropItem.ItemName);
 
             var rotations = Random.Range(wheelSettingsConfig.MinRotation, wheelSettingsConfig.MaxRotation);
-            targetRotation = selectedSliceIndex * AnglePerSlice;
+            _targetRotation = _selectedSliceIndex * AnglePerSlice;
 
 
             if (wheelSettingsConfig.ClockwiseRotation)
             {
-                targetRotation = -(FullRotationDegrees * rotations + (FullRotationDegrees - targetRotation));
+                _targetRotation = -(FullRotationDegrees * rotations + (FullRotationDegrees - _targetRotation));
             }
             else
             {
-                targetRotation = FullRotationDegrees * rotations + targetRotation;
+                _targetRotation = FullRotationDegrees * rotations + _targetRotation;
             }
 
-            wheelTransform.DORotate(new Vector3(0, 0, targetRotation),
+            wheelTransform.DORotate(new Vector3(0, 0, _targetRotation),
                     wheelSettingsConfig.SpinDuration, RotateMode.FastBeyond360)
                 .SetEase(wheelSettingsConfig.SpinCurve)
                 .OnComplete(OnSpinComplete);
@@ -78,7 +106,7 @@ namespace FortuneWheel.Scripts.Managers
 
             _currentZone.PopulateSliceItems(_cachedSliceItems, SliceItemCount);
 
-            for (int i = 0; i < SliceItemCount; i++)
+            for (var i = 0; i < SliceItemCount; i++)
             {
                 sliceVisualControllers[i].Initialize(_cachedSliceItems[i]);
             }
@@ -105,9 +133,19 @@ namespace FortuneWheel.Scripts.Managers
 
         private void OnSpinComplete()
         {
-            var selectedItem = _cachedSliceItems[selectedSliceIndex];
-            rewardDispatcher.Dispatch(selectedItem.DropItem, selectedItem.DropCount);
-            SetWheelSlices();
+            var selectedItem = _cachedSliceItems[_selectedSliceIndex];
+            rewardDispatcher.Dispatch(selectedItem.DropItem, selectedItem.DropCount,
+                () =>
+                {
+                    SetWheelSlices();
+                    SetSpinButtonState(true);
+                });
+        }
+
+        private void SetSpinButtonState(bool state)
+        {
+            _canSpin = state;
+            _spinButton.interactable = _canSpin;
         }
     }
 }
