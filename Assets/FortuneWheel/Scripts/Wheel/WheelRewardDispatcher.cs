@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using FortuneWheel.Scripts.Item;
+using FortuneWheel.Scripts.Managers;
 using FortuneWheel.Scripts.UI.Visual;
 using UnityEngine;
 
@@ -26,7 +29,7 @@ namespace FortuneWheel.Scripts.Wheel
             inventoryUI.Bind(inventory);
         }
 
-        public void Dispatch(ItemBaseSO item, int quantity,Action onDispatchComplete)
+        public void Dispatch(ItemBaseSO item, int quantity, Action onDispatchComplete)
         {
             bool isNew = !inventory.Has(item.ItemID);
 
@@ -37,7 +40,7 @@ namespace FortuneWheel.Scripts.Wheel
                 : inventoryUI.GetExistingViewForItem(item.ItemID);
 
             if (targetView == null) return;
-            
+
             var displayStart = isNew
                 ? 0
                 : inventory.GetQuantity(item.ItemID) - quantity;
@@ -50,13 +53,15 @@ namespace FortuneWheel.Scripts.Wheel
             //LaunchFlying(item, quantity, targetView, onDispatchComplete);
         }
 
-        IEnumerator DelayedLaunch(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView , Action onComplete)
+        IEnumerator DelayedLaunch(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView,
+            Action onComplete)
         {
             yield return null;
             LaunchFlying(item, quantity, targetView, onComplete);
         }
 
-        private void LaunchFlying(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView , Action onComplete)
+        private void LaunchFlying(ItemBaseSO item, int quantity, WheelInventorySlotVisualController targetView,
+            Action onComplete)
         {
             var effectiveCount = Mathf.Clamp(spawnCount, 1, quantity);
             var perIcon = quantity / effectiveCount;
@@ -95,6 +100,29 @@ namespace FortuneWheel.Scripts.Wheel
                     }
                 });
             }
+        }
+
+        public void ClaimRewards()
+        {
+            List<RewardVisualData> rewards = new(inventory.SlotCount);
+
+            var inventorySlots = inventory.GetAllSlots();
+            for (var i = 0; i < inventory.SlotCount; i++)
+            {
+                var slotData = inventorySlots[i];
+
+                rewards.Add( new RewardVisualData()
+                {
+                    itemId = slotData.Item.ItemID,
+                    itemName = slotData.Item.ItemName,
+                    icon = slotData.Item.Icon,
+                    quantity = slotData.Quantity,
+                    rarity = slotData.Item.Rarity,
+                });
+            }
+            
+            RewardPanelManager.Instance.ShowRewardPanel(rewards);
+            RemoveAll();
         }
 
         public void RemoveAll()

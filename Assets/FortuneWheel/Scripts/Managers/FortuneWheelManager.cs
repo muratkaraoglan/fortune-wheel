@@ -104,6 +104,8 @@ namespace FortuneWheel.Scripts.Managers
 
         private void OnExitButtonClicked()
         {
+            rewardDispatcher.ClaimRewards();
+            ResetWheel();
         }
 
         private void ResetWheel()
@@ -132,7 +134,7 @@ namespace FortuneWheel.Scripts.Managers
             }
 
             spinCountTextScroller.ScrollToValue(_currentSpinCount.ToString(),
-                _currentZone.IsSafeZone ? Color.green : Color.white);
+                _currentZone.IsSafeZone ? Color.green : new Color(.6f, .6f, .6f));
         }
 
         private int SelectWinningSliceIndex()

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using FortuneWheel.Scripts.Item.Enums;
 using TMPro;
+using UnityEngine;
 
 namespace FortuneWheel.Scripts.Utils
 {
@@ -61,6 +63,25 @@ namespace FortuneWheel.Scripts.Utils
                 int k = rnd.Next(n + 1);
                 (list[k], list[n]) = (list[n], list[k]);
             }
+        }
+        
+        public static Color GetColor(this ItemRarity rarity)
+        {
+            return rarity switch
+            {
+                ItemRarity.Common => Color.white, 
+                ItemRarity.Uncommon => new Color(0.12f, 0.77f, 0.12f), 
+                ItemRarity.Rare => new Color(0f, 0.44f, 0.87f),    
+                ItemRarity.Epic => new Color(0.64f, 0.21f, 0.93f),
+                ItemRarity.Legendary => new Color(1f, 0.5f, 0f), 
+                ItemRarity.Mythic => new Color(0.9f, 0.1f, 0.1f), 
+                _ => Color.white
+            };
+        }
+
+        public static string GetHexColor(this ItemRarity rarity)
+        {
+            return "#" + ColorUtility.ToHtmlStringRGB(rarity.GetColor());
         }
 
     }

@@ -69,6 +69,12 @@ namespace FortuneWheel.Scripts.Wheel
             return _views[index];
         }
 
+        public InventorySlot<ItemBaseSO> GetSlotVisualDataWithIndex(int index)
+        {
+            if (index < 0 || index >= _views.Count) return null;
+            return _views[index].SlotData.slot;
+        } 
+
         public WheelInventorySlotVisualController GetLastView() => _views.Count > 0 ? _views[^1] : null;
 
         public void RemoveAll()

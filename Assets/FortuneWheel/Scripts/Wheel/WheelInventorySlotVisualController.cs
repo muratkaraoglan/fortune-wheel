@@ -19,6 +19,7 @@ namespace FortuneWheel.Scripts.Wheel
 
         public AnimatedCounter Counter { get; private set; }
         public PunchFeedback Feedback { get; private set; }
+        public WheelInventorySlotVisualData SlotData { get; private set; }
 
         private void Awake()
         {
@@ -28,6 +29,7 @@ namespace FortuneWheel.Scripts.Wheel
 
         protected override void OnInitialize(WheelInventorySlotVisualData data)
         {
+            SlotData = data;
             iconImage.enabled = true;
             iconImage.sprite = data.slot.Item.Icon;
             quantityText.SetText(data.slot.Quantity.ToString());
