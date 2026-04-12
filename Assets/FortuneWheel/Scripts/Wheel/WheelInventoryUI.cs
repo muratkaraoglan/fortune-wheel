@@ -71,6 +71,16 @@ namespace FortuneWheel.Scripts.Wheel
 
         public WheelInventorySlotVisualController GetLastView() => _views.Count > 0 ? _views[^1] : null;
 
+        public void RemoveAll()
+        {
+            for (var i = _views.Count - 1; i >= 0; i--)
+            {
+                Destroy(_views[i].gameObject);
+            }
+
+            _views.Clear();
+        }
+
         private void OnDestroy() => Unbind();
     }
 }

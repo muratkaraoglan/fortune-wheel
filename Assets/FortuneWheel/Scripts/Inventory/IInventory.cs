@@ -10,5 +10,6 @@ namespace FortuneWheel.Scripts.Inventory
         bool Has(string itemId, int quantity = 1);
         int GetQuantity(string itemId);
         IReadOnlyList<InventorySlot<T>> GetAllSlots();
+        void RemoveAll();
     }
 }

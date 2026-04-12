@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.UI.Visual;
 using UnityEngine;
@@ -96,6 +95,12 @@ namespace FortuneWheel.Scripts.Wheel
                     }
                 });
             }
+        }
+
+        public void RemoveAll()
+        {
+            inventory.RemoveAll();
+            inventoryUI.RemoveAll();
         }
     }
 }

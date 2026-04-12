@@ -60,6 +60,10 @@ namespace FortuneWheel.Scripts.Inventory
             => _slots.Where(s => !s.IsEmpty && s.Item.ItemID == itemId).Sum(s => s.Quantity);
 
         public IReadOnlyList<InventorySlot<T>> GetAllSlots() => _slots;
+        public void RemoveAll()
+        {
+             _slots.Clear();
+        }
 
         public int IndexOf(string itemId)
             => _slots.FindIndex(s => !s.IsEmpty && s.Item.ItemID == itemId);
