@@ -1,4 +1,5 @@
 using DG.Tweening;
+using FortuneWheel.Scripts.UI.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,7 @@ namespace FortuneWheel.Scripts.UI.Visual
     {
         [SerializeField] private RectTransform rect;
         [SerializeField] private Image background;
-        [SerializeField] private Color flashColor = new(1f, 0.85f, 0.2f, 0.55f);
-        [SerializeField] private Color normalColor = new(1f, 1f, 1f, 1f);
+        [SerializeField] private PunchSettingsSO  settings;
         
         private Sequence _seq;
 
@@ -19,11 +19,11 @@ namespace FortuneWheel.Scripts.UI.Visual
             rect.localScale = Vector3.one;
             _seq = DOTween.Sequence();
 
-            _seq.Append(rect.DOPunchScale(Vector3.one * 0.22f, 0.28f, 4, 0.5f));
+            _seq.Append(rect.DOPunchScale(settings.punchAmount, settings.duration, settings.vibrato, settings.elasticity));
             _seq.Join(
-                background.DOColor(flashColor, 0.07f)
-                    .SetLoops(2, LoopType.Yoyo)
-                    .OnComplete(() => background.color = normalColor)
+                background.DOColor(settings.flashColor, settings.flashDuration)
+                    .SetLoops(settings.flashLoops, LoopType.Yoyo)
+                    .OnComplete(() => background.color = settings.normalColor)
             );
         }
 

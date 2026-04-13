@@ -218,8 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect: {fileID: 4955297261421433862}
   background: {fileID: 4955297261421433857}
-  flashColor: {r: 1, g: 0.85, b: 0.2, a: 0.55}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  settings: {fileID: 11400000, guid: 82854bf3bce8f8d4e87a33ad965bc131, type: 2}
 --- !u!1 &4955297261421433863
 GameObject:
   m_ObjectHideFlags: 0
