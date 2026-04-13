@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6712ca3ed644eaab2363bf9ea64d2e6, type: 3}
-  m_Name: Cash SO
+  m_Name: Currency SO Gold
   m_EditorClassIdentifier: 
-  <ItemID>k__BackingField: 6c6a887c-5950-4647-896b-e824a1061d2e
-  <ItemName>k__BackingField: Cash
-  <Icon>k__BackingField: {fileID: 21300000, guid: 9a59226571ee1c8428cbb3c658b1f798,
+  <ItemID>k__BackingField: 4d0bdaea-1cde-42c4-ab2b-ea2e77e877fa
+  <ItemName>k__BackingField: Gold
+  <Icon>k__BackingField: {fileID: 21300000, guid: 64ae6f21740ac5b4a87ad358ade9ae45,
     type: 3}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: 4
+  <Currency>k__BackingField: 1
