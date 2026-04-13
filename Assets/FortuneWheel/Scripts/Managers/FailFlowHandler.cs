@@ -1,6 +1,4 @@
 using System;
-using FortuneWheel.Scripts.UI.Visual;
-using FortuneWheel.Scripts.Wheel;
 using UnityEngine;
 
 namespace FortuneWheel.Scripts.Managers

@@ -6066,6 +6066,9 @@ MonoBehaviour:
   rewardVisualContainer: {fileID: 1620650703}
   claimButton: {fileID: 1252813856}
   canvasGroup: {fileID: 2009687152}
+  animationDelay: 0.1
+  animationDuration: 0.4
+  animationEase: 27
 --- !u!1 &2032388907
 GameObject:
   m_ObjectHideFlags: 0
