@@ -49,7 +49,7 @@ namespace FortuneWheel.Scripts.Wheel
  
             foreach (var wheelSliceItemData in guaranteedItems)
             {
-                if (IsSkull(wheelSliceItemData))
+                if (IsPenaltyItem(wheelSliceItemData))
                 {
                     Debug.LogError("You can not add skull item the guaranteed list while zone is safe. Item deleted.");
                     guaranteedItems.Remove(wheelSliceItemData);
@@ -59,7 +59,7 @@ namespace FortuneWheel.Scripts.Wheel
 
             foreach (var wheelSliceItemData in randomItemPool)
             {
-                if (IsSkull(wheelSliceItemData))
+                if (IsPenaltyItem(wheelSliceItemData))
                 {
                     Debug.LogError("You can not add skull item the random pool list while zone is safe. Item deleted.");
                     randomItemPool.Remove(wheelSliceItemData);
@@ -69,7 +69,7 @@ namespace FortuneWheel.Scripts.Wheel
 #endif
         }
 
-        private bool IsSkull(WheelSliceItemData wheelSliceItemData) =>
+        public bool IsPenaltyItem(WheelSliceItemData wheelSliceItemData) =>
             wheelSliceItemData.DropItem is MiscItemSO { IsPenalty: true };
     }
 }

@@ -120,15 +120,12 @@ namespace FortuneWheel.Scripts.Managers
         {
             var selectedItem = _cachedSliceItems[_selectedSliceIndex];
 
-            if (IsPenaltyItem(selectedItem))
+            if (_currentZone.IsPenaltyItem(selectedItem))
                 HandlePenalty(selectedItem);
             else
                 HandleReward(selectedItem);
         }
-
-        private static bool IsPenaltyItem(WheelSliceItemData item) =>
-            item.DropItem is MiscItemSO { IsPenalty: true };
-
+        
         private void HandleReward(WheelSliceItemData item)
         {
             rewardDispatcher.Dispatch(item.DropItem, item.DropCount, () =>
