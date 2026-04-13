@@ -7,7 +7,6 @@ namespace FortuneWheel.Scripts.UI.Visual
     public class AnimatedCounter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI countText;
-        [SerializeField] private float punchStrength = 0.4f;
 
         private Sequence _seq;
         private int _current;

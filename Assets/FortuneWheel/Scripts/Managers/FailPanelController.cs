@@ -3,8 +3,9 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FortuneWheel.Scripts.UI.Visual
+namespace FortuneWheel.Scripts.Managers
 {
+    
     [RequireComponent(typeof(CanvasGroup))]
     public class FailPanelController : MonoBehaviour
     {
@@ -40,7 +41,7 @@ namespace FortuneWheel.Scripts.UI.Visual
         private Sequence _sequence;
         private Tween _bgColorTween;
         private Tween _heartbeatTween;
-        private Action<bool> _onMakeChoice;
+        private Action<FailPanelResult> _onMakeChoice;
 
         private void OnValidate()
         {
@@ -62,7 +63,7 @@ namespace FortuneWheel.Scripts.UI.Visual
             reviveButtonAds.onClick.AddListener(OnReviveButtonAdsClicked);
         }
 
-        public void OpenFailPanel(Sprite failSprite, Action<bool> onMakeChoice)
+        public void OpenFailPanel(Sprite failSprite, Action<FailPanelResult> onMakeChoice)
         {
             failImage.sprite = failSprite;
             canvasGroup.interactable = true;
@@ -117,24 +118,21 @@ namespace FortuneWheel.Scripts.UI.Visual
 
         private void OnGiveUpButtonClicked()
         {
-            Debug.Log("Give up button");
             CloseFailPanel();
-            _onMakeChoice?.Invoke(true);
+            _onMakeChoice?.Invoke(FailPanelResult.GiveUp);
         }
 
         private void OnReviveButtonGoldClicked()
         {
-            Debug.Log("Revive with gold");
             //TODO:check gold?
             CloseFailPanel();
-            _onMakeChoice?.Invoke(false);
+            _onMakeChoice?.Invoke(FailPanelResult.Continue);
         }
 
         private void OnReviveButtonAdsClicked()
         {
-            Debug.Log("Revive with ads");
             CloseFailPanel();
-            _onMakeChoice?.Invoke(false);
+            _onMakeChoice?.Invoke(FailPanelResult.Continue);
         }
 
         private void OnDestroy()

@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
 using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.UI.Visual;
 using FortuneWheel.Scripts.Wheel;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace FortuneWheel.Scripts.Managers
 {
@@ -17,31 +14,38 @@ namespace FortuneWheel.Scripts.Managers
         [SerializeField] private WheelRewardDispatcher rewardDispatcher;
         [SerializeField] private FailPanelController failPanelController;
 
-        [Header("Inventory")]
+        [Header("Inventory")] 
         [SerializeField] private Transform inventoryDefaultHolder;
         [SerializeField] private Transform inventoryScrollViewTransform;
-        
+
         [Header("Slices")] 
         [SerializeField] private List<WheelSliceVisualController> sliceVisualControllers;
 
-        [Header("Visual")]
+        [Header("Visual")] 
         [SerializeField] private Image wheelImage;
         [SerializeField] private Image wheelPointerImage;
         [SerializeField] private TextScroller spinCountTextScroller;
         [SerializeField] private Button spinButton;
         [SerializeField] private Button exitButton;
 
+        private WheelSpinController _spinController;
+        private SliceSelector _sliceSelector;
+        private WheelVisualController _visualController;
+        private FailFlowHandler _failFlowHandler;
+
         private readonly List<WheelSliceItemData> _cachedSliceItems = new(8);
         private WheelZoneConfigSO _currentZone;
 
         private const int SliceItemCount = 8;
-        private const float AnglePerSlice = 45;
-        private const float FullRotationDegrees = 360f;
-
         private float _targetRotation;
         private int _currentSpinCount = 1;
         private int _selectedSliceIndex;
         private bool _canSpin;
+        
+        private void Awake()
+        {
+            InitializeSystems();
+        }
 
         private void Start()
         {
@@ -50,63 +54,116 @@ namespace FortuneWheel.Scripts.Managers
             exitButton.onClick.AddListener(OnExitButtonClicked);
         }
 
-        private void OnValidate()
-        {
-            FindButton("SpinButton",ref spinButton);
-            FindButton("ExitButton", ref exitButton);
-
-            failPanelController = transform.GetComponentInChildren<FailPanelController>();
-            if (failPanelController == null) Debug.LogError("FailPanelController not found");
-        }
-
-        private void FindButton(string buttonName,ref Button assignButton)
-        {
-            var btn = transform.Find(buttonName);
-            if (btn != null) assignButton = btn.GetComponent<Button>();
-            else Debug.LogError($"{buttonName} button not found");
-        }
-
         private void OnDestroy()
         {
             spinButton.onClick.RemoveListener(Spin);
             exitButton.onClick.RemoveListener(OnExitButtonClicked);
         }
 
+        private void OnValidate()
+        {
+            FindButton("SpinButton", ref spinButton);
+            FindButton("ExitButton", ref exitButton);
+
+            failPanelController = transform.GetComponentInChildren<FailPanelController>();
+            if (failPanelController == null)
+                Debug.LogError("FailPanelController not found");
+        }
+
+        private void InitializeSystems()
+        {
+            _spinController = new WheelSpinController(wheelTransform, wheelSettingsConfig);
+            _sliceSelector = new SliceSelector(_cachedSliceItems);
+            _visualController = new WheelVisualController(
+                wheelImage,
+                wheelPointerImage,
+                spinCountTextScroller,
+                exitButton,
+                sliceVisualControllers);
+            _failFlowHandler = new FailFlowHandler(
+                failPanelController,
+                inventoryScrollViewTransform,
+                inventoryDefaultHolder);
+        }
+        
+#if UNITY_EDITOR
+        private void FindButton(string buttonName, ref Button assignButton)
+        {
+            var btn = transform.Find(buttonName);
+            if (btn != null) assignButton = btn.GetComponent<Button>();
+            else Debug.LogError($"{buttonName} button not found");
+        }
+#endif
+        
+        // ──────────────────────────────────────────────
+        // Spin Flow
+        // ──────────────────────────────────────────────
+
         private void Spin()
         {
             if (!_canSpin) return;
+
             exitButton.interactable = false;
             SetSpinButtonState(false);
             _currentSpinCount++;
 
-            _selectedSliceIndex = SelectWinningSliceIndex();
+            _selectedSliceIndex = _sliceSelector.SelectWinningIndex();
 
-            print(_cachedSliceItems[_selectedSliceIndex].DropItem.ItemName);
+#if UNITY_EDITOR
+            Debug.Log($"[Wheel] Selected: {_cachedSliceItems[_selectedSliceIndex].DropItem.ItemName}");
+#endif
 
-            var rotations = Random.Range(wheelSettingsConfig.MinRotation, wheelSettingsConfig.MaxRotation);
-            _targetRotation = _selectedSliceIndex * AnglePerSlice;
+            _spinController.Spin(_selectedSliceIndex, OnSpinComplete);
+        }
 
+        private void OnSpinComplete()
+        {
+            var selectedItem = _cachedSliceItems[_selectedSliceIndex];
 
-            if (wheelSettingsConfig.ClockwiseRotation)
+            if (IsPenaltyItem(selectedItem))
+                HandlePenalty(selectedItem);
+            else
+                HandleReward(selectedItem);
+        }
+
+        private static bool IsPenaltyItem(WheelSliceItemData item) =>
+            item.DropItem is MiscItemSO { IsPenalty: true };
+
+        private void HandleReward(WheelSliceItemData item)
+        {
+            rewardDispatcher.Dispatch(item.DropItem, item.DropCount, () =>
             {
-                _targetRotation = -(FullRotationDegrees * rotations + (FullRotationDegrees - _targetRotation));
+                SetWheelSlices();
+                SetSpinButtonState(true);
+            });
+        }
+
+        private void HandlePenalty(WheelSliceItemData item)
+        {
+            _failFlowHandler.OpenFailPanel(item.DropItem.Icon, OnFailPanelResult);
+        }
+
+        // ──────────────────────────────────────────────
+        // Fail Flow
+        // ──────────────────────────────────────────────
+
+        private void OnFailPanelResult(FailPanelResult result)
+        {
+            if (result == FailPanelResult.GiveUp)
+            {
+                rewardDispatcher.RemoveAll();
+                ResetWheel();
             }
             else
             {
-                _targetRotation = FullRotationDegrees * rotations + _targetRotation;
+                SetWheelSlices();
+                SetSpinButtonState(true);
             }
-
-            wheelTransform.DORotate(new Vector3(0, 0, _targetRotation),
-                    wheelSettingsConfig.SpinDuration, RotateMode.FastBeyond360)
-                .SetEase(wheelSettingsConfig.SpinCurve)
-                .OnComplete(OnSpinComplete);
         }
 
-        private void OnExitButtonClicked()
-        {
-            rewardDispatcher.ClaimRewards();
-            ResetWheel();
-        }
+        // ──────────────────────────────────────────────
+        // Wheel Setup
+        // ──────────────────────────────────────────────
 
         private void ResetWheel()
         {
@@ -117,89 +174,30 @@ namespace FortuneWheel.Scripts.Managers
 
         private void SetWheelSlices()
         {
-            wheelTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            
+            _spinController.ResetRotation();
             _currentZone = wheelSettingsConfig.GetCurrentZone(_currentSpinCount);
-            
-            wheelImage.sprite = _currentZone.WheelSprite;
-            wheelPointerImage.sprite = _currentZone.WheelPointerSprite;
-            
-            exitButton.interactable = _currentZone.IsSafeZone;
-            
+
             _currentZone.PopulateSliceItems(_cachedSliceItems, SliceItemCount);
 
-            for (var i = 0; i < SliceItemCount; i++)
-            {
-                sliceVisualControllers[i].Initialize(_cachedSliceItems[i]);
-            }
-
-            spinCountTextScroller.ScrollToValue(_currentSpinCount.ToString(),
-                _currentZone.IsSafeZone ? Color.green : new Color(.6f, .6f, .6f));
+            _visualController.ApplyZoneVisuals(_currentZone);
+            _visualController.UpdateSliceVisuals(_cachedSliceItems);
+            _visualController.UpdateSpinCountDisplay(_currentSpinCount, _currentZone.IsSafeZone);
         }
 
-        private int SelectWinningSliceIndex()
+        // ──────────────────────────────────────────────
+        // Helpers
+        // ──────────────────────────────────────────────
+
+        private void SetSpinButtonState(bool canSpin)
         {
-            var totalChance = _cachedSliceItems.Sum(i => i.DropChance);
-            var randomValue = Random.Range(0f, totalChance);
-
-            var cumulative = 0f;
-
-            for (var i = 0; i < SliceItemCount; i++)
-            {
-                cumulative += _cachedSliceItems[i].DropChance;
-                if (randomValue <= cumulative)
-                {
-                    return i;
-                }
-            }
-
-            return 0;
+            _canSpin = canSpin;
+            spinButton.interactable = canSpin;
         }
 
-        private void OnSpinComplete()
+        private void OnExitButtonClicked()
         {
-            var selectedItem = _cachedSliceItems[_selectedSliceIndex];
-
-            if (selectedItem.DropItem is MiscItemSO { IsPenalty: true })
-            {
-                OnFail(selectedItem);
-            }
-            else
-            {
-                rewardDispatcher.Dispatch(selectedItem.DropItem, selectedItem.DropCount,
-                    () =>
-                    {
-                        SetWheelSlices();
-                        SetSpinButtonState(true);
-                    });
-            }
-        }
-
-        private void SetSpinButtonState(bool state)
-        {
-            _canSpin = state;
-            spinButton.interactable = _canSpin;
-        }
-
-        private void OnFail(WheelSliceItemData selectedItem)
-        {
-            inventoryScrollViewTransform.SetParent(failPanelController.transform);
-            failPanelController.OpenFailPanel(selectedItem.DropItem.Icon, OnFailPanelChoice);
-        }
-
-        private void OnFailPanelChoice(bool isGiveUp)
-        {
-            if (isGiveUp)
-            {
-                rewardDispatcher.RemoveAll();
-                ResetWheel();
-            }
-            else
-            {
-                SetWheelSlices();
-                SetSpinButtonState(true);
-            }
-            inventoryScrollViewTransform.SetParent(inventoryDefaultHolder);
+            rewardDispatcher.ClaimRewards();
+            ResetWheel();
         }
     }
 }

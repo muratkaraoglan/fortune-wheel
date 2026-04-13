@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.Managers;
 using FortuneWheel.Scripts.UI.Visual;
@@ -104,6 +103,8 @@ namespace FortuneWheel.Scripts.Wheel
 
         public void ClaimRewards()
         {
+            if (inventory.SlotCount == 0) return;
+
             List<RewardVisualData> rewards = new(inventory.SlotCount);
 
             var inventorySlots = inventory.GetAllSlots();
@@ -111,7 +112,7 @@ namespace FortuneWheel.Scripts.Wheel
             {
                 var slotData = inventorySlots[i];
 
-                rewards.Add( new RewardVisualData()
+                rewards.Add(new RewardVisualData()
                 {
                     itemId = slotData.Item.ItemID,
                     itemName = slotData.Item.ItemName,
@@ -120,7 +121,7 @@ namespace FortuneWheel.Scripts.Wheel
                     rarity = slotData.Item.Rarity,
                 });
             }
-            
+
             RewardPanelManager.Instance.ShowRewardPanel(rewards);
             RemoveAll();
         }

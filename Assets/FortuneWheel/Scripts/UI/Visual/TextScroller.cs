@@ -34,7 +34,7 @@ namespace FortuneWheel.Scripts.UI.Visual
             var seq = DOTween.Sequence();
 
             seq.Join(_currentRect.DOAnchorPosY(_containerHeight, scrollDuration).SetEase(Ease.OutBack));
-            seq.Join(background.DOColor(backgroundColor, 0.3f).SetEase(Ease.OutBack));
+            seq.Join(background.DOColor(backgroundColor, scrollDuration).SetEase(Ease.OutBack));
             seq.Join(_nextRect.DOAnchorPosY(0, scrollDuration).SetEase(Ease.OutBack));
 
             seq.OnComplete(() =>
