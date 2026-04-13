@@ -103,3 +103,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 3448953536490524441}
+  settings: {fileID: 11400000, guid: 778bee9830d51854cba07d4000cc2eef, type: 2}
