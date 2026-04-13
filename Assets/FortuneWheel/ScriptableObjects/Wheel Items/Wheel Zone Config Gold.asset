@@ -22,48 +22,60 @@ MonoBehaviour:
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 1af022d5be1c8994db431075840a90d9,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 10
+    baseDropCount: 3
+    exponent: 1
   - <DropItem>k__BackingField: {fileID: 11400000, guid: a2162f72768dc7740bd69494e5239165,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 5
+    baseDropCount: 11
+    exponent: 1.02
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 00c4c1303098e094cabcfd2e639d0d03,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 7
+    baseDropCount: 4
+    exponent: 0.87
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 99fb921da51d91144bb27e4fc0250511,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 5
+    baseDropCount: 1
+    exponent: 1.12
   - <DropItem>k__BackingField: {fileID: 11400000, guid: bc34b0495b3d7dd45af0b032682c97b4,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 8
+    baseDropCount: 2
+    exponent: 0.78
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 1562818534c71e44b868107c91ec53d3,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 1
+    exponent: 0
   - <DropItem>k__BackingField: {fileID: 11400000, guid: d5df16c0701ae0147af48c0547b6163a,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 1
+    exponent: 0
   - <DropItem>k__BackingField: {fileID: 11400000, guid: d58345983b89bbf4ca7311b9891bf2e1,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 1
+    exponent: 0
   - <DropItem>k__BackingField: {fileID: 11400000, guid: c6a098606a845944abbe5eb4e8573634,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 55
+    baseDropCount: 16
+    exponent: 0.61
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 4074c301d877e62479db31d58017932d,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 3500
+    baseDropCount: 321
+    exponent: 0.82
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 4074c301d877e62479db31d58017932d,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 5000
+    baseDropCount: 41
+    exponent: 0.5
   - <DropItem>k__BackingField: {fileID: 11400000, guid: b4731e984bbfa734ea6e42cd307fd12d,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 1
+    exponent: 0

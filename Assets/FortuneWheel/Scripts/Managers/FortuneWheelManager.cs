@@ -174,7 +174,7 @@ namespace FortuneWheel.Scripts.Managers
             _spinController.ResetRotation();
             _currentZone = wheelSettingsConfig.GetCurrentZone(_currentSpinCount);
 
-            _currentZone.PopulateSliceItems(_cachedSliceItems, SliceItemCount);
+            _currentZone.PopulateSliceItems(_cachedSliceItems, SliceItemCount, _currentSpinCount);
 
             _visualController.ApplyZoneVisuals(_currentZone);
             _visualController.UpdateSliceVisuals(_cachedSliceItems);

@@ -21,45 +21,56 @@ MonoBehaviour:
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 77df9128274654b43a54d772e38077b5,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 0
+    baseDropCount: 0
+    exponent: 0
   randomItemPool:
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 4074c301d877e62479db31d58017932d,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 2000
-  - <DropItem>k__BackingField: {fileID: 11400000, guid: 1e7f8874f8a5e2a499b9661a16a671a2,
-      type: 2}
-    <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 2
-  - <DropItem>k__BackingField: {fileID: 11400000, guid: 00c4c1303098e094cabcfd2e639d0d03,
-      type: 2}
-    <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 100
+    exponent: 1.05
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 35583cd9e74713b4ba428a33545140dc,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
-  - <DropItem>k__BackingField: {fileID: 11400000, guid: 4074c301d877e62479db31d58017932d,
+    baseDropCount: 1
+    exponent: 0.5
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 1e7f8874f8a5e2a499b9661a16a671a2,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 567
+    baseDropCount: 3
+    exponent: 0.3
   - <DropItem>k__BackingField: {fileID: 11400000, guid: ad74b37de0f70794da58056ac40a4d9f,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 1
+    baseDropCount: 2
+    exponent: 0.5
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: c6a098606a845944abbe5eb4e8573634,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    baseDropCount: 3
+    exponent: 0.5
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 4074c301d877e62479db31d58017932d,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    baseDropCount: 70
+    exponent: 1.2
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: c6a098606a845944abbe5eb4e8573634,
+      type: 2}
+    <DropChance>k__BackingField: 12.5
+    baseDropCount: 10
+    exponent: 0.3
   - <DropItem>k__BackingField: {fileID: 11400000, guid: a1b8c818aa639084da4c5289e87bf513,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 3
+    baseDropCount: 3
+    exponent: 0.6
   - <DropItem>k__BackingField: {fileID: 11400000, guid: 9a85abce714c0074b9b2fd9a8bbf539e,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 2
-  - <DropItem>k__BackingField: {fileID: 11400000, guid: c6a098606a845944abbe5eb4e8573634,
+    baseDropCount: 1
+    exponent: 0.62
+  - <DropItem>k__BackingField: {fileID: 11400000, guid: 00c4c1303098e094cabcfd2e639d0d03,
       type: 2}
     <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 10
-  - <DropItem>k__BackingField: {fileID: 11400000, guid: c6a098606a845944abbe5eb4e8573634,
-      type: 2}
-    <DropChance>k__BackingField: 12.5
-    <DropCount>k__BackingField: 20
+    baseDropCount: 2
+    exponent: 0.5

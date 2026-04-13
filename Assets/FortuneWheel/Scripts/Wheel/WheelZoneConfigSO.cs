@@ -18,14 +18,16 @@ namespace FortuneWheel.Scripts.Wheel
         [Header("Random Pool")] [SerializeField]
         private List<WheelSliceItemData> randomItemPool;
 
-        public void PopulateSliceItems(List<WheelSliceItemData> cachedListItem, int sliceCount)
+        public void PopulateSliceItems(List<WheelSliceItemData> cachedListItem, int sliceCount,int spinCount)
         {
             cachedListItem.Clear();
 
             var guaranteedCount = Mathf.Min(guaranteedItems.Count, sliceCount);
             for (var i = 0; i < guaranteedCount; i++)
             {
-                cachedListItem.Add(guaranteedItems[i]);
+                var item = guaranteedItems[i];
+                item.CalculateDropCount(spinCount);
+                cachedListItem.Add(item);
             }
 
             var remaining = sliceCount - cachedListItem.Count;
@@ -35,6 +37,8 @@ namespace FortuneWheel.Scripts.Wheel
                 var randomCount = Mathf.Min(remaining, randomItemPool.Count);
                 for (var i = 0; i < randomCount; i++)
                 {
+                    var item = randomItemPool[i];
+                    item.CalculateDropCount(spinCount);
                     cachedListItem.Add(randomItemPool[i]);
                 }
             }
