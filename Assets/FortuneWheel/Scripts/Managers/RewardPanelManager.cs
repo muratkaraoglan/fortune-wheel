@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using FortuneWheel.Scripts.UI.Visual;
@@ -15,6 +14,11 @@ namespace FortuneWheel.Scripts.Managers
         [SerializeField] private Button claimButton;
         [SerializeField] private CanvasGroup canvasGroup;
 
+        [Header("Animation Settings")] 
+        [SerializeField] private float animationDelay = 0.1f;
+        [SerializeField] private float animationDuration = 0.4f;
+        [SerializeField] private Ease animationEase = Ease.OutBack;
+        
         private readonly List<RewardVisualController> _rewardVisualPool = new();
         
         private void OnValidate()
@@ -41,11 +45,6 @@ namespace FortuneWheel.Scripts.Managers
             canvasGroup.interactable = true;
             
             claimButton.transform.localScale = Vector3.zero;
-            
-            foreach (var visual in _rewardVisualPool)
-                visual.gameObject.SetActive(false);
-            
-            Debug.Log(rewards.Count);
 
             for (var i = 0; i < rewards.Count; i++)
             {
@@ -63,17 +62,17 @@ namespace FortuneWheel.Scripts.Managers
                 }
 
                 visual.Initialize(rewards[i]);
-                
                 visual.transform.localScale = Vector3.zero;
-                var delay = i * 0.1f;
-                visual.transform.DOScale(Vector3.one, 0.4f)
+                
+                var delay = i * animationDelay;
+                visual.transform.DOScale(Vector3.one, animationDuration)
                     .SetDelay(delay)
-                    .SetEase(Ease.OutBack);
+                    .SetEase(animationEase);
             }
             
-            claimButton.transform.DOScale(Vector3.one, 0.4f)
-                .SetDelay(rewards.Count * 0.1f)
-                .SetEase(Ease.OutBack);
+            claimButton.transform.DOScale(Vector3.one, animationDuration)
+                .SetDelay(rewards.Count * animationDelay)
+                .SetEase(animationEase);
         }
 
         private void OnClaimButtonClick()
