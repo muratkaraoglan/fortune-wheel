@@ -62,12 +62,14 @@ namespace FortuneWheel.Scripts.Managers
 
         private void OnValidate()
         {
+#if UNITY_EDITOR
             FindButton("SpinButton", ref spinButton);
             FindButton("ExitButton", ref exitButton);
 
             failPanelController = transform.GetComponentInChildren<FailPanelController>();
             if (failPanelController == null)
                 Debug.LogError("FailPanelController not found");
+#endif
         }
 
         private void InitializeSystems()
