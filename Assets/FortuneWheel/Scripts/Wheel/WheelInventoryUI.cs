@@ -15,6 +15,7 @@ namespace FortuneWheel.Scripts.Wheel
 
         private Inventory<ItemBaseSO> _inventory;
         private readonly List<WheelInventorySlotVisualController> _views = new();
+        private readonly List<WheelInventorySlotVisualController> _pool = new();
 
         public bool SuppressRefresh { get; set; }
 
@@ -35,10 +36,21 @@ namespace FortuneWheel.Scripts.Wheel
 
         private void HandleSlotCreated(InventorySlot<ItemBaseSO> slot)
         {
-            var view = Instantiate(slotPrefab, slotContainer);
+            WheelInventorySlotVisualController view;
+            if (_pool.Count > 0)
+            {
+                view = _pool[0];
+                _pool.RemoveAt(0);
+            }
+            else
+            {
+                view = Instantiate(slotPrefab, slotContainer);
+            }
             _views.Add(view);
-
+            view.gameObject.SetActive(true);
             view.transform.localScale = Vector3.zero;
+            view.transform.SetSiblingIndex(_views.Count - 1);
+
             view.transform
                 .DOScale(Vector3.one, spawnScaleDuration)
                 .SetEase(Ease.OutBack);
@@ -73,7 +85,7 @@ namespace FortuneWheel.Scripts.Wheel
         {
             if (index < 0 || index >= _views.Count) return null;
             return _views[index].SlotData.slot;
-        } 
+        }
 
         public WheelInventorySlotVisualController GetLastView() => _views.Count > 0 ? _views[^1] : null;
 
@@ -81,7 +93,9 @@ namespace FortuneWheel.Scripts.Wheel
         {
             for (var i = _views.Count - 1; i >= 0; i--)
             {
-                Destroy(_views[i].gameObject);
+                //Destroy(_views[i].gameObject);
+                _pool.Add(_views[i]);
+                _views[i].gameObject.SetActive(false);
             }
 
             _views.Clear();
