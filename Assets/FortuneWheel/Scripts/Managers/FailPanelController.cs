@@ -1,11 +1,11 @@
 using System;
 using DG.Tweening;
+using FortuneWheel.Scripts.UI.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace FortuneWheel.Scripts.Managers
 {
-    
     [RequireComponent(typeof(CanvasGroup))]
     public class FailPanelController : MonoBehaviour
     {
@@ -14,29 +14,12 @@ namespace FortuneWheel.Scripts.Managers
         [SerializeField] private Image failImage;
         [SerializeField] private RectTransform failImageRect;
 
-        [Header("Buttons")] [SerializeField] private Button giveUpButton;
+        [Header("Buttons")] 
+        [SerializeField] private Button giveUpButton;
         [SerializeField] private Button reviveButtonGold;
         [SerializeField] private Button reviveButtonAds;
-
-        [Header("Animation Settings")] [SerializeField]
-        private float fadeInDuration = 0.4f;
-
-        [Header("BG Color Settings")] [SerializeField]
-        private Color bgColorA = Color.white;
-
-        [SerializeField] private Color bgColorB = Color.red;
-        [SerializeField] private float bgColorDuration = 0.5f;
-
-        [Header("Fail Image Settings")] [SerializeField]
-        private float failImageScaleDuration = 0.5f;
-
-        [SerializeField] private Vector3 failImageHeartbeatScale = new Vector3(1.15f, 1.15f, 1f);
-        [SerializeField] private float failImageHeartbeatDuration = 0.12f;
-
-        [Header("Button Settings")] [SerializeField]
-        private float buttonAppearDelay = 0.5f;
-
-        [SerializeField] private float buttonScaleDuration = 0.3f;
+        
+        [SerializeField] private FailPanelAnimationSettingsSO failPanelAnimationSettings;
 
         private Sequence _sequence;
         private Tween _bgColorTween;
@@ -46,18 +29,18 @@ namespace FortuneWheel.Scripts.Managers
         private void OnValidate()
         {
             var btnGiveUp = transform.Find("GiveUpButton").GetComponent<Button>();
-            if (btnGiveUp != null) giveUpButton = btnGiveUp;
+            if (btnGiveUp != null && giveUpButton!= null) giveUpButton = btnGiveUp;
             var btnRevive = transform.Find("ReviveButtonGold").GetComponent<Button>();
-            if (btnRevive != null) reviveButtonGold = btnRevive;
+            if (btnRevive != null && reviveButtonGold!= null) reviveButtonGold = btnRevive;
             var btnAds = transform.Find("ReviveButtonAds").GetComponent<Button>();
-            if (btnAds != null) reviveButtonAds = btnAds;
+            if (btnAds != null && reviveButtonAds!= null) reviveButtonAds = btnAds;
         }
 
         private void Awake()
         {
             canvasGroup.alpha = 0;
             canvasGroup.blocksRaycasts = false;
-            failPanelBgImage.color = bgColorB;
+            failPanelBgImage.color = failPanelAnimationSettings.BgColorB;
             giveUpButton.onClick.AddListener(OnGiveUpButtonClicked);
             reviveButtonGold.onClick.AddListener(OnReviveButtonGoldClicked);
             reviveButtonAds.onClick.AddListener(OnReviveButtonAdsClicked);
@@ -82,28 +65,34 @@ namespace FortuneWheel.Scripts.Managers
             reviveButtonGold.transform.localScale = Vector3.zero;
             reviveButtonAds.transform.localScale = Vector3.zero;
 
-            _sequence.Append(canvasGroup.DOFade(1f, fadeInDuration));
+            _sequence.Append(canvasGroup.DOFade(1f, failPanelAnimationSettings.FadeInDuration));
 
-            _sequence.Append(failImageRect.DOScale(Vector3.one, failImageScaleDuration)
-                .SetEase(Ease.OutBack)
+            _sequence.Append(failImageRect.DOScale(Vector3.one, failPanelAnimationSettings.FailImageScaleDuration)
+                .SetEase(failPanelAnimationSettings.FailImageScaleEase)
                 .OnComplete(() =>
                 {
-                    _bgColorTween = failPanelBgImage.DOColor(bgColorA, bgColorDuration)
-                        .From(bgColorB)
-                        .SetLoops(-1, LoopType.Yoyo)
-                        .SetEase(Ease.InOutSine);
+                    _bgColorTween = failPanelBgImage.DOColor(failPanelAnimationSettings.BgColorA,
+                            failPanelAnimationSettings.BgColorDuration)
+                        .From(failPanelAnimationSettings.BgColorB)
+                        .SetLoops(failPanelAnimationSettings.FailPanelBgColorLoops, 
+                            failPanelAnimationSettings.FailPanelBgColorLoopType)
+                        .SetEase(failPanelAnimationSettings.FailPanelBgColorEase);
 
-                    _heartbeatTween = failImageRect.DOScale(failImageHeartbeatScale, failImageHeartbeatDuration)
-                        .SetLoops(-1, LoopType.Yoyo)
-                        .SetEase(Ease.InOutQuad);
+                    _heartbeatTween = failImageRect.DOScale(failPanelAnimationSettings.FailImageHeartBeatScale,
+                            failPanelAnimationSettings.FailImageHeartBeatDuration)
+                        .SetLoops(failPanelAnimationSettings.HeartBeatTweenScaleLoops,
+                            failPanelAnimationSettings.HeartBeatTweenScaleLoopType)
+                        .SetEase(failPanelAnimationSettings.HeartbeatScaleEase);
                 }));
 
-            _sequence.AppendInterval(buttonAppearDelay);
+            _sequence.AppendInterval(failPanelAnimationSettings.ButtonsAppearDelay);
 
-            _sequence.Append(giveUpButton.transform.DOScale(Vector3.one, buttonScaleDuration).SetEase(Ease.OutBack));
-            _sequence.Append(reviveButtonGold.transform.DOScale(Vector3.one, buttonScaleDuration)
-                .SetEase(Ease.OutBack));
-            _sequence.Append(reviveButtonAds.transform.DOScale(Vector3.one, buttonScaleDuration).SetEase(Ease.OutBack));
+            _sequence.Append(giveUpButton.transform.DOScale(Vector3.one, failPanelAnimationSettings.ButtonScaleDuration)
+                .SetEase(failPanelAnimationSettings.ButtonScaleEase));
+            _sequence.Append(reviveButtonGold.transform.DOScale(Vector3.one, failPanelAnimationSettings.ButtonScaleDuration)
+                .SetEase(failPanelAnimationSettings.ButtonScaleEase));
+            _sequence.Append(reviveButtonAds.transform.DOScale(Vector3.one, failPanelAnimationSettings.ButtonScaleDuration)
+                .SetEase(failPanelAnimationSettings.ButtonScaleEase));
         }
 
         private void CloseFailPanel()
