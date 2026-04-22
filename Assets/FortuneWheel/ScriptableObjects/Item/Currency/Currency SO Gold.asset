@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: Gold
   <Icon>k__BackingField: {fileID: 21300000, guid: 64ae6f21740ac5b4a87ad358ade9ae45,
     type: 3}
-  <Rarity>k__BackingField: 4
+  <Rarity>k__BackingField: {fileID: 11400000, guid: f5cad36d01eaef14c85b5132a12def50,
+    type: 2}
   <Currency>k__BackingField: 1

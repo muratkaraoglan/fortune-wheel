@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: POP ART
   <Icon>k__BackingField: {fileID: 21300000, guid: 52c69b5617163744db2c8841079ab4b1,
     type: 3}
-  <Rarity>k__BackingField: 4
+  <Rarity>k__BackingField: {fileID: 11400000, guid: be9151ffb22f4cb4e9330b29fbde4434,
+    type: 2}
   targetItem: {fileID: 11400000, guid: 9131a31f18ce8c54dbad98b41ee6a6d6, type: 2}

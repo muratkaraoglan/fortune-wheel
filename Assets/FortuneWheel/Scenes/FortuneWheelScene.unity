@@ -5285,15 +5285,8 @@ MonoBehaviour:
   giveUpButton: {fileID: 523288815}
   reviveButtonGold: {fileID: 227193682}
   reviveButtonAds: {fileID: 297762478}
-  fadeInDuration: 0.4
-  bgColorA: {r: 1, g: 1, b: 1, a: 1}
-  bgColorB: {r: 1, g: 0, b: 0, a: 1}
-  bgColorDuration: 0.7
-  failImageScaleDuration: 0.5
-  failImageHeartbeatScale: {x: 1.15, y: 1.15, z: 1}
-  failImageHeartbeatDuration: 0.7
-  buttonAppearDelay: 0.7
-  buttonScaleDuration: 0.3
+  failPanelAnimationSettings: {fileID: 11400000, guid: 78da6eb54630ffb46980553ecdbc3e14,
+    type: 2}
 --- !u!225 &1818990414
 CanvasGroup:
   m_ObjectHideFlags: 0

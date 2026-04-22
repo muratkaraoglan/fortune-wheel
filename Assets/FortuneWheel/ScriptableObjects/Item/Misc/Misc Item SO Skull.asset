@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: SKull
   <Icon>k__BackingField: {fileID: 21300000, guid: 90a77ce8d9e4014449e2bbf97fbc976b,
     type: 3}
-  <Rarity>k__BackingField: 5
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 6af72b77e156d054293b446f38564969,
+    type: 2}
   <IsPenalty>k__BackingField: 1

@@ -8,6 +8,6 @@ namespace FortuneWheel.Scripts.Item
         string ItemID { get; }
         string ItemName { get; }
         Sprite Icon { get; }
-        ItemRarity Rarity { get; }
+        ItemRaritySO Rarity { get; }
     }
 }

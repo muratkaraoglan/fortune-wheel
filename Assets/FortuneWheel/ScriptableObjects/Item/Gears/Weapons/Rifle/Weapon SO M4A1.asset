@@ -16,6 +16,7 @@ MonoBehaviour:
   <ItemName>k__BackingField: M4A1
   <Icon>k__BackingField: {fileID: 21300000, guid: 372297499b20d104b99537bbf75c5ba9,
     type: 3}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 6af72b77e156d054293b446f38564969,
+    type: 2}
   <Category>k__BackingField: 1
   <GearSlotType>k__BackingField: 1

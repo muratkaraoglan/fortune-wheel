@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemID>k__BackingField: 146f6168-282e-4eda-b769-adddf6a0dbb7
   <ItemName>k__BackingField: P90
   <Icon>k__BackingField: {fileID: 0}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: b8a6f2baf2cd9814d9157a863b3708d1,
+    type: 2}
   <Category>k__BackingField: 3
   <GearSlotType>k__BackingField: 1

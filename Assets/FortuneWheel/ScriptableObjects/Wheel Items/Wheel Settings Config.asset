@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wheel Settings Config
   m_EditorClassIdentifier: 
   <SpinDuration>k__BackingField: 3
-  <MinRotation>k__BackingField: 5
-  <MaxRotation>k__BackingField: 7
+  <MinRotation>k__BackingField: 3
+  <MaxRotation>k__BackingField: 5
   <ClockwiseRotation>k__BackingField: 1
   <SpinCurve>k__BackingField:
     serializedVersion: 2

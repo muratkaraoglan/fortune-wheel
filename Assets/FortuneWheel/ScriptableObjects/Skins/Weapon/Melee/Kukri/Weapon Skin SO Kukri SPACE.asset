@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: SPACE
   <Icon>k__BackingField: {fileID: 21300000, guid: 2fb89ab12a4cd264eb3f6a780d1cbec5,
     type: 3}
-  <Rarity>k__BackingField: 3
+  <Rarity>k__BackingField: {fileID: 11400000, guid: f5cad36d01eaef14c85b5132a12def50,
+    type: 2}
   targetItem: {fileID: 11400000, guid: 6ebf2299c8be8a94ea5ad8a50ae16e81, type: 2}

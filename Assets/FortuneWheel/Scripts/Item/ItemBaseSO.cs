@@ -9,7 +9,7 @@ namespace FortuneWheel.Scripts.Item
         [field: SerializeField, ReadOnly] public string ItemID { get; private set; }
         [field: SerializeField] public string ItemName { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
-        [field: SerializeField] public ItemRarity Rarity { get; private set; }
+        [field: SerializeField] public ItemRaritySO Rarity { get; private set; }
 
         public abstract ItemType Type { get; }
 

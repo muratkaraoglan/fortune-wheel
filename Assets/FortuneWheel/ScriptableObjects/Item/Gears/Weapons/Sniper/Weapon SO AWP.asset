@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemID>k__BackingField: 34337160-34a3-4435-884f-f1dc5573340f
   <ItemName>k__BackingField: AWP
   <Icon>k__BackingField: {fileID: 0}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: b8a6f2baf2cd9814d9157a863b3708d1,
+    type: 2}
   <Category>k__BackingField: 4
   <GearSlotType>k__BackingField: 1

@@ -16,6 +16,7 @@ MonoBehaviour:
   <ItemName>k__BackingField: M67
   <Icon>k__BackingField: {fileID: 21300000, guid: 41b567bd403849c47af6d8dd0a219099,
     type: 3}
-  <Rarity>k__BackingField: 2
+  <Rarity>k__BackingField: {fileID: 11400000, guid: be9151ffb22f4cb4e9330b29fbde4434,
+    type: 2}
   <Category>k__BackingField: 7
   <GearSlotType>k__BackingField: 9

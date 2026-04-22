@@ -16,4 +16,5 @@ MonoBehaviour:
   <ItemName>k__BackingField: Standart No Light
   <Icon>k__BackingField: {fileID: 21300000, guid: b807ddbe19f864f4f99954f12a1bb53a,
     type: 3}
-  <Rarity>k__BackingField: 2
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 6af72b77e156d054293b446f38564969,
+    type: 2}

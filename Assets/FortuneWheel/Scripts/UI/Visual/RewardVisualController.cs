@@ -1,4 +1,5 @@
 using DG.Tweening;
+using FortuneWheel.Scripts.Item;
 using FortuneWheel.Scripts.Item.Enums;
 using FortuneWheel.Scripts.Utils;
 using TMPro;
@@ -13,7 +14,7 @@ namespace FortuneWheel.Scripts.UI.Visual
         public string itemName;
         public Sprite icon;
         public int quantity;
-        public ItemRarity rarity;
+        public ItemRaritySO rarity;
     }
 
     public class RewardVisualController : BaseVisualController<RewardVisualData>
@@ -30,7 +31,7 @@ namespace FortuneWheel.Scripts.UI.Visual
             iconImage.sprite = data.icon;
             itemNameText.text = data.itemName;
             quantityText.text = data.quantity.ToString();
-            backgroundImage.color = data.rarity.GetColor();
+            backgroundImage.color = data.rarity.RarityColor;
             _backgroundImageTween = backgroundImage.transform
                 .DORotate(Vector3.forward * -360, 7f, RotateMode.FastBeyond360)
                 .SetLoops(-1, LoopType.Restart)

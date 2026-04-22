@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemID>k__BackingField: c7e8d321-6e81-4059-96c4-c5fac39fa82a
   <ItemName>k__BackingField: Helmet
   <Icon>k__BackingField: {fileID: 0}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 6af72b77e156d054293b446f38564969,
+    type: 2}
   <Category>k__BackingField: 13
   <GearSlotType>k__BackingField: 6

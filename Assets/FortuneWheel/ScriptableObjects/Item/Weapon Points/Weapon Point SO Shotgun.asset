@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: Shotgun Weapon Point
   <Icon>k__BackingField: {fileID: 21300000, guid: 21238b27355c8c343b0d26a458ae2bbf,
     type: 3}
-  <Rarity>k__BackingField: 1
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 6af72b77e156d054293b446f38564969,
+    type: 2}
   <TargetCategory>k__BackingField: 2

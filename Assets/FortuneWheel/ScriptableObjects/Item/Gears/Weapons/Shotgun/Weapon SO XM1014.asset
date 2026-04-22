@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemID>k__BackingField: 9eb9a7b0-d7e2-4b18-b79e-a0d1236c4b8d
   <ItemName>k__BackingField: XM1014
   <Icon>k__BackingField: {fileID: 0}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: be9151ffb22f4cb4e9330b29fbde4434,
+    type: 2}
   <Category>k__BackingField: 2
   <GearSlotType>k__BackingField: 1

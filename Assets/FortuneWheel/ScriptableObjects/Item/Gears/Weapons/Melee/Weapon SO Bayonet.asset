@@ -15,6 +15,7 @@ MonoBehaviour:
   <ItemID>k__BackingField: 82dc488a-788b-4924-b157-675c8b8cd1e1
   <ItemName>k__BackingField: Bayonet
   <Icon>k__BackingField: {fileID: 0}
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: {fileID: 11400000, guid: cd73c6488fb33434faa74c1e2b483f64,
+    type: 2}
   <Category>k__BackingField: 6
   <GearSlotType>k__BackingField: 3

@@ -16,5 +16,6 @@ MonoBehaviour:
   <ItemName>k__BackingField: SUMMER VICE
   <Icon>k__BackingField: {fileID: 21300000, guid: 483bd8cd2d1ac0d419e1883a5705d847,
     type: 3}
-  <Rarity>k__BackingField: 5
+  <Rarity>k__BackingField: {fileID: 11400000, guid: cd73c6488fb33434faa74c1e2b483f64,
+    type: 2}
   targetItem: {fileID: 11400000, guid: ae41b69d3b018d4448b2b10325b2d663, type: 2}
